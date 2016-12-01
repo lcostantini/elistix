@@ -29,4 +29,17 @@ defmodule Elistix.Index do
     Elistix.get("/#{name}/_stats")
   end
   def index_stats, do: "You need to specify a name"
+
+  @doc """
+  Populate with data any index.
+  Attributes are two strings with the name of the index and the type, the
+  third attribute is a JSON that contains the data you want to save.
+
+  The data attribute is a JSON with key and value with the information
+  you want to save.
+  '{ "id" : 1, "name" : "Order item for id 1", "status" : "good" }'
+  """
+  def load_data(name, type, data) do
+    Elistix.post("/#{name}/#{type}", data)
+  end
 end
