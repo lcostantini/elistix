@@ -22,4 +22,7 @@ defmodule Elistix.Query do
   def search(name, type, query) do
     Elistix.request(:get, "/#{name}/#{type}/_search", query)
   end
+  def search, do: "You need to specify a name, type and data"
+  def search(_), do: "You need to specify a name, type and data"
+  def search(_, _), do: "You need to specify a name, type and data"
 end
