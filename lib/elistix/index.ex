@@ -10,8 +10,8 @@ defmodule Elistix.Index do
   def create_index(name, type) do
     Elistix.put("/#{name}", '{"mappings" : {"#{type}" : {}}}')
   end
-  def create_index, do: "You need to specify a name and input"
-  def create_index(_), do: "You need to specify a name and input"
+  def create_index, do: "You need to specify a name and type"
+  def create_index(_), do: "You need to specify a name and type"
 
   @doc """
   Delete an index.
@@ -42,4 +42,7 @@ defmodule Elistix.Index do
   def load_data(name, type, data) do
     Elistix.post("/#{name}/#{type}", data)
   end
+  def load_data, do: "You need to specify a name, type and data"
+  def load_data(_), do: "You need to specify a name, type and data"
+  def load_data(_, _), do: "You need to specify a name, type and data"
 end
