@@ -45,4 +45,12 @@ defmodule Elistix.Index do
   def load_data, do: "You need to specify a name, type and data"
   def load_data(_), do: "You need to specify a name, type and data"
   def load_data(_, _), do: "You need to specify a name, type and data"
+
+  @doc """
+  This endpoint refresh the index making all operations performed since the last
+  refresh available for search.
+  """
+  def refresh(name) do
+    Elistix.get("/#{name}/_refresh")
+  end
 end

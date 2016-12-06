@@ -14,9 +14,8 @@ defmodule Elistix.QueryTest do
       data = '{ "id" : 1, "name" : "Order item for id 1", "status" : "good" }'
       load_data("tests", "test", data)
 
-      # If the process is faster than the load in the index this test fails,
-      # this is why I added the sleep.
-      Process.sleep(1000)
+      # To get the data ready for search we need to refresh the index.
+      refresh("tests")
 
       query = '{ "query" : { "match_all" : {} }}'
       case search("tests", "test", query) do
