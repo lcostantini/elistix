@@ -76,18 +76,6 @@ defmodule Elistix.IndexTest do
       end
     end
 
-    test "load bad formatted data in an index" do
-      data = '{ id : 1, name : "Order item for id 1", "status" : "good" }'
-      data_loaded = load_data("tests", "test", data)
-
-      # To get the data ready for search we need to refresh the index.
-      refresh("tests")
-
-      case data_loaded do
-        {:ok, response} -> assert(response.body["error"]["reason"] == "failed to parse")
-      end
-    end
-
     test "try to create an index without name or type" do
       assert load_data() == "You need to specify a name, type and data"
       assert load_data("tests") == "You need to specify a name, type and data"
