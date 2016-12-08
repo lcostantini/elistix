@@ -23,11 +23,6 @@ defmodule Elistix.IndexTest do
         {:ok, response} -> assert(response.status_code == 400)
       end
     end
-
-    test "try to create an index without name or type" do
-      assert create_index("tests") == "You need to specify a name and type"
-      assert create_index() == "You need to specify a name and type"
-    end
   end
 
   describe "Elistix.Index.remove_index/1" do
@@ -39,10 +34,6 @@ defmodule Elistix.IndexTest do
       case remove_index("nonexistent") do
         {:ok, response} -> assert(response.status_code == 404)
       end
-    end
-
-    test "try to remove an index without name" do
-      assert remove_index() == "You need to specify a name"
     end
   end
 
@@ -62,10 +53,6 @@ defmodule Elistix.IndexTest do
         {:ok, response} -> assert(response.body["error"]["reason"] == "no such index")
       end
     end
-
-    test "try to remove an index without name" do
-      assert remove_index() == "You need to specify a name"
-    end
   end
 
   describe "Elistix.Index.load_data/3" do
@@ -74,12 +61,6 @@ defmodule Elistix.IndexTest do
       case load_data("tests", "test", data) do
         {:ok, response} -> assert(response.status_code == 201)
       end
-    end
-
-    test "try to create an index without name or type" do
-      assert load_data() == "You need to specify a name, type and data"
-      assert load_data("tests") == "You need to specify a name, type and data"
-      assert load_data("tests", "test") == "You need to specify a name, type and data"
     end
   end
 end
