@@ -1,4 +1,4 @@
-# Elistix [![Build Status](https://travis-ci.org/lcostantini/elistix.svg?branch=master)](https://travis-ci.org/lcostantini/elistix) [![Inline docs](http://inch-ci.org/github/lcostantini/elistix.svg)](http://inch-ci.org/github/lcostantini/elistix)
+# Elistix [![Build Status](https://travis-ci.org/lcostantini/elistix.svg?branch=master)](https://travis-ci.org/lcostantini/elistix) [![Inline docs](http://inch-ci.org/github/lcostantini/elistix.svg)](http://inch-ci.org/github/lcostantini/elistix) [![Hex.pm](https://img.shields.io/hexpm/v/elistix.svg?style=plastic)](https://hex.pm/packages/elistix)
 An API to talk with ElasticSearch without having to learn a new DSL.
 
 You are only required to learn ElasticSearch from its own documentation and then
@@ -25,14 +25,7 @@ just to supported versions.
 ElasticSearch by simply copying and pasting the code provided by the
 documentation.*
 
-# How does it work?
-It just makes use of [HTTPoison](https://github.com/edgurgel/httpoison) to make
-requests to the ElasticSearch service and Poison to deal with JSON.
-
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-as:
 
   1. Add `elistix` to your list of dependencies in `mix.exs`:
 
@@ -49,3 +42,77 @@ as:
       [applications: [:elistix]]
     end
     ```
+
+## Configure environment variables
+The endpoint for Elasticsearch used by default is
+```
+"http://127.0.0.1:9200"
+```
+
+To change it you have two choices:
+  1. You can create a `.env` file and add:
+
+    ```
+    export ES_URI="URI VALUE"
+    ```
+
+    Then, simply run `source .env` in your shell.
+
+  2. In your Phoenix repository you can set the value in the file `config/{some_env}`
+    e.g.: in `config/dev.exs`
+
+    ```
+    config :elistix, :es_uri, "URI VALUE"
+    ```
+
+# How does it work?
+It just makes use of [HTTPoison](https://github.com/edgurgel/httpoison) to make
+requests to the ElasticSearch service and Poison to deal with JSON.
+
+Before start using Elistix you need to require it
+```
+require Elistix
+```
+
+Now you can create a new index and load data at the same time with the following
+command:
+```
+Elistix.Index.load_data("examples", "example", '{"name": "trying elistix", "status": "good"}')
+```
+
+Then you can run a query over the index
+```
+query = '{
+          "query": {
+            "term": {
+              "status": {
+                "value": "good"
+              }
+            }
+          }
+        }'
+
+Elistix.Query.search("examples", "example", query)
+```
+
+The response has the format provided by HTTPoison:
+```
+{ok, response} if everything goes well
+{error, reason} if something fail
+```
+
+Even you can build the queries with params given by the endpoint
+```
+query = '{
+          "query": {
+            "term": {
+              "status": {
+                "value": "#{params["status"]}"
+              }
+            }
+          }
+        }'
+
+Elistix.Query.search("examples", "example", query)
+
+```
