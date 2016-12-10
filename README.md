@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/lcostantini/elistix.svg?branch=master)](https://travis-ci.org/lcostantini/elistix)
-
-# Elistix
+# Elistix [![Build Status](https://travis-ci.org/lcostantini/elistix.svg?branch=master)](https://travis-ci.org/lcostantini/elistix) [![Inline docs](http://inch-ci.org/github/lcostantini/elistix.svg)](http://inch-ci.org/github/lcostantini/elistix)
 An API to talk with ElasticSearch without having to learn a new DSL.
 
 You are only required to learn ElasticSearch from its own documentation and then

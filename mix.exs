@@ -33,6 +33,7 @@ defmodule Elistix.Mixfile do
 
   defp deps do
     [{:httpoison, "~> 0.10.0"},
-     {:poison, "~> 2.0"}]
+     {:poison, "~> 2.0"},
+     {:inch_ex, "~> 0.5", only: [:dev, :test]}]
   end
 end
