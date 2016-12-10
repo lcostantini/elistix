@@ -24,7 +24,7 @@ defmodule Elistix.Mixfile do
 
   defp package do
     [
-      name: "Elistix",
+      name: :elistix,
       maintainers: ["Leandro Costantini"],
       licenses: ["GPL 3.0"],
       links: %{"GitHub" => "https://github.com/lcostantini/elistix"}
@@ -34,6 +34,7 @@ defmodule Elistix.Mixfile do
   defp deps do
     [{:httpoison, "~> 0.10.0"},
      {:poison, "~> 2.0"},
-     {:inch_ex, "~> 0.5", only: [:dev, :test]}]
+     {:inch_ex, "~> 0.5", only: [:dev, :test]},
+     {:ex_doc, "~> 0.14", only: :dev}]
   end
 end
