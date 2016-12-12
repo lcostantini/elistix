@@ -11,7 +11,7 @@ defmodule Elistix do
 
   use HTTPoison.Base
 
-  @endpoint System.get_env("ES_URI") || "http://127.0.0.1:9200"
+  @endpoint System.get_env("ES_URI") || Application.get_env(:elistix, :es_uri) || "http://127.0.0.1:9200"
 
   defp process_url(url) do
     @endpoint <> url
