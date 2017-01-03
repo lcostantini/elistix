@@ -1,4 +1,6 @@
 defmodule Elistix.Query do
+  require Logger
+
   @moduledoc """
   This module makes all the operations related to the queries in Elasticsearch.
 
@@ -24,6 +26,8 @@ defmodule Elistix.Query do
      }'
   """
   def search(name, type, query) do
+    Logger.info "Query"
+    Logger.debug query
     Elistix.request(:get, "/#{name}/#{type}/_search", query)
   end
 end
