@@ -20,7 +20,7 @@ defmodule Elistix.IndexTest do
 
       # Create the same index return a 400
       case create_index("tests", "test") do
-        {:ok, response} -> assert(response.status_code == 400)
+        {:error, reason} -> assert(reason.status_code == 400)
       end
     end
   end
@@ -32,7 +32,7 @@ defmodule Elistix.IndexTest do
       end
 
       case remove_index("nonexistent") do
-        {:ok, response} -> assert(response.status_code == 404)
+        {:error, reason} -> assert(reason.status_code == 404)
       end
     end
   end
@@ -46,11 +46,11 @@ defmodule Elistix.IndexTest do
 
     test "show the stats of an unknown index" do
       case index_stats("unknown") do
-        {:ok, response} -> assert(response.status_code == 404)
+        {:error, reason} -> assert(reason.status_code == 404)
       end
 
       case index_stats("unknown") do
-        {:ok, response} -> assert(response.body["error"]["reason"] == "no such index")
+        {:error, reason} -> assert(reason.body["error"]["reason"] == "no such index")
       end
     end
   end

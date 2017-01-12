@@ -1,4 +1,6 @@
 defmodule Elistix do
+  alias Elistix.Response
+
   @moduledoc """
   Provides a configuration base for the other modules.
 
@@ -12,6 +14,11 @@ defmodule Elistix do
   use HTTPoison.Base
 
   @endpoint System.get_env("ES_URI") || Application.get_env(:elistix, :es_uri) || "http://127.0.0.1:9200"
+
+  def get(url), do: Response.parse_response(super(url))
+  def post(url, data), do: Response.parse_response(super(url, data))
+  def put(url, data), do: Response.parse_response(super(url, data))
+  def delete(url), do: Response.parse_response(super(url))
 
   defp process_url(url) do
     @endpoint <> url
