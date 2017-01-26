@@ -3,13 +3,13 @@ defmodule Elistix.Mixfile do
 
   def project do
     [app: :elistix,
-     version: "1.0.0",
+     version: "1.0.1",
      elixir: "~> 1.3",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     description: description,
-     package: package,
-     deps: deps()]
+     name: "Elistix",
+     description: description(),
+     package: package(),
+     deps: deps(),
+     source_url: "https://github.com/lcostantini/elistix"]
   end
 
   def application do
@@ -24,7 +24,7 @@ defmodule Elistix.Mixfile do
 
   defp package do
     [
-      name: :elistix,
+      files: ["lib", "README.md", "LICENSE", "mix.exs"],
       maintainers: ["Leandro Costantini"],
       licenses: ["GPL 3.0"],
       links: %{"GitHub" => "https://github.com/lcostantini/elistix"}
@@ -32,8 +32,7 @@ defmodule Elistix.Mixfile do
   end
 
   defp deps do
-    [{:httpoison, "~> 0.10.0"},
-     {:poison, "~> 2.0"},
+    [{:httpoison, "~> 0.11"},
      {:inch_ex, "~> 0.5", only: [:dev, :test]},
      {:ex_doc, "~> 0.14", only: :dev}]
   end
