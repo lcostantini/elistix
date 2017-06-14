@@ -31,7 +31,7 @@ documentation.*
 
     ```elixir
     def deps do
-      [{:elistix, "~> 0.1.0"}]
+      [{:elistix, "~> 1.0.1"}]
     end
     ```
 
